@@ -1,30 +1,31 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <NavBar @clickBar="callback_clickBar" @clickLocation="location"></NavBar>
+  <Content_Image_area
+    :receivedclickBar="clickBar_value"
+    :receivedclickLocation="clickLocation_value"
+  >
+  </Content_Image_area>
+  <Totop_Button></Totop_Button>
+  <Content_Footer></Content_Footer>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script setup>
+import NavBar from "./components/NavBar.vue";
+import Content_Image_area from "./components/Content_Image_area.vue";
+import Content_Footer from "./components/Content_Footer.vue";
+import Totop_Button from "./components/Totop_Button.vue";
+import { watch, ref } from "vue";
+
+//////////點擊navbar關閉Images_enlarge 取值後傳送至Content_Image_area
+let clickBar_value = ref("");
+function callback_clickBar(origin_value) {
+  clickBar_value.value = origin_value;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+//////////點擊地點 取值後傳送至Content_Image_area
+let clickLocation_value = ref("");
+function location(origin_value) {
+  clickLocation_value.value = origin_value;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+</script>
+
+<style></style>
